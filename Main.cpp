@@ -2,14 +2,14 @@
 
 #include "Types.h"
 #include "Stack.h"
-#include "Logfile.h"
 #include "Protection.h"
 
 #include "ReadCommands.h"
+//#include "Processor.h"
 
 int main() {
 
-    open_log("Stackerrors.log", __TIME__);
+    //open_log("Stackerrors.log", __TIME__);
 
     struct Processor processor = {};
 
@@ -25,26 +25,28 @@ int main() {
     FILE *output = fopen("MachineCode.txt", "w+");
     FILE *output1 = fopen("DecomplierTest.txt", "w");*/
 
-    processor.input = fopen("Source1.txt", "r");
+
+
+    //processor.input = fopen("Source1.txt", "r");
     processor.output = fopen("MachineCode1.txt", "w+");
-    processor.dcoutput = fopen("DecomplierTest1.txt", "w");
+    //processor.dcoutput = fopen("DecomplierTest1.txt", "w");
 
     //complier(input, output);
-    complier(&processor);
+    //complier(&processor);
 
-    fseek(processor.output, 0, SEEK_SET);
-    decomplier(&processor);
+    //fseek(processor.output, 0, SEEK_SET);
+    //decomplier(&processor);
 
     /*fseek(input, 0, SEEK_SET);
     read_commands(input, &stk);*/
 
-    fseek(processor.output, 0, SEEK_SET);
+    //fseek(processor.output, 0, SEEK_SET);
     //cpu(processor.output, &processor.stack);
     cpu(&processor);
 
-    fclose(processor.input);
+    //fclose(processor.input);
     fclose(processor.output);
-    fclose(processor.dcoutput);
+    //fclose(processor.dcoutput);
 
 
     stack_dtor(&processor.stack);

@@ -12,7 +12,8 @@ enum COMMANDS {
     MUL  = 4,
     DIV  = 5,
     OUT  = 6,
-    HLT  = 7
+    HLT  = 7,
+    IN   = 8
 };
 
 struct Processor {
@@ -28,6 +29,6 @@ int complier(struct Processor *proc);
 //int decomplier(FILE *input, FILE *output);
 int decomplier(struct Processor *proc);
 //int cpu(FILE *input, Stack *stk);
-int cpu(struct Processor *proc);
+//int cpu(struct Processor *proc);
 
 #endif // READCOMMANDS_H_INCLUDED

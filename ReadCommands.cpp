@@ -110,7 +110,7 @@ int read_commands(FILE *fp, Stack *stk) {      //интерпретатор
 }
 
 
-int complier(struct Processor *proc) {
+/*int complier(struct Processor *proc) {
 
     assert(proc != 0);
 
@@ -149,9 +149,9 @@ int complier(struct Processor *proc) {
 
     return NoErrors;
 }
+  */
 
-
-int cpu(struct Processor *proc) {
+/*int cpu(struct Processor *proc) {
 
     assert(proc != 0);
 
@@ -256,11 +256,11 @@ int cpu(struct Processor *proc) {
             }
         }
     }
-}
+} */
 
 
 
-int decomplier(struct Processor *proc) {
+/*int decomplier(struct Processor *proc) {
 
     assert(proc != 0);
 
@@ -312,7 +312,7 @@ int decomplier(struct Processor *proc) {
         }
     }
     return NoErrors;
-}
+} */
 
 
 
