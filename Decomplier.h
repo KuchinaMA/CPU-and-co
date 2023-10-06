@@ -3,6 +3,9 @@
 
 #include <stdio.h>
 
+const int DecomplierVersion = 2;
+static const char *Signature = "mipt";
+
 enum DecomplierErrors {
 
     //NoErrors         = 0,

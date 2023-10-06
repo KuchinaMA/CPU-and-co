@@ -1,9 +1,13 @@
-push 3000
-push 200
+2
+mipt
+in
+in
+mul
+push 4
+in
+in
+mul
+mul
 sub
-push 3
-push 10
-sub
-div
 out
 hlt

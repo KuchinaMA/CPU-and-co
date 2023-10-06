@@ -3,7 +3,10 @@
 
 #include <stdio.h>
 
-const int MAX_LINE_LEN = 256;
+//static const int MAX_LINE_LEN = 256;
+
+const int ComplierVersion = 2;
+static const char *Signature = "mipt";
 
 enum ComplierErrors {
 

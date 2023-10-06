@@ -14,22 +14,16 @@ int main() {
 
     struct Processor processor = {};
 
-    STACK_CONSTRUCT(stk, StackDefaultCapacity);
+    processor_ctor(&processor, "MachineCode2.txt");
 
-    processor.stack = stk;
-
-
-    PRINT_STACK(&processor.stack);
-
-    processor.output = fopen("MachineCode1.txt", "r");
+    processor_dump(&processor, __FILE__, __LINE__, __func__, stdout);
+    //PRINT_STACK(&processor.stack);
 
     cpu(&processor);
 
+    //processor_dump(&processor, __FILE__, __LINE__, __func__, stdout);
 
-    fclose(processor.output);
-
-
-    stack_dtor(&processor.stack);
+    processor_dtor(&processor);
 
     return 0;
 }

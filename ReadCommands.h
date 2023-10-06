@@ -6,22 +6,30 @@
 const int MAX_LINE_LEN = 256;
 
 enum COMMANDS {
-    PUSH = 1,
-    ADD  = 2,
-    SUB  = 3,
-    MUL  = 4,
-    DIV  = 5,
-    OUT  = 6,
-    HLT  = 7,
-    IN   = 8
+    PUSH   = 1,
+    ADD    = 2,
+    SUB    = 3,
+    MUL    = 4,
+    DIV    = 5,
+    OUT    = 6,
+    HLT    = 7,
+    IN     = 8,
+    POP    = 9,
+    PUSH_R = 10
 };
 
-struct Processor {
+enum Regs {
+    RAX = 0,
+    RBX = 1,
+    RCX = 2
+};
+
+/*struct Processor {
     struct Stack stack;
     FILE* input;
     FILE* output;
     FILE* dcoutput;
-};
+};*/
 
 int read_commands(FILE *fp, Stack *stk); //интерпретатор
 //int complier(FILE *input, FILE *output);

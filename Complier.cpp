@@ -13,38 +13,84 @@ int complier(FILE* input, FILE* output) {
     assert(input != NULL);
     assert(output != NULL);
 
-    char line[MAX_LINE_LEN] = "";
+    int version = 0;
+    fscanf(input, "%d", &version);
 
-    while (fscanf(input, "%s", line) > 0) {
+    char sign[MAX_LINE_LEN] = "";
+    fscanf(input, "%s", sign);
 
-        if (strcmp(line, "push") == 0) {
 
-            fprintf(output, "%d ", PUSH);
+    if (version != ComplierVersion) printf("Сompiler and data versions do not match\n");
 
-            elem_t number = 0;
-            fscanf(input, ELEMF, &number);
+    else if (strcmp(sign, Signature) != 0) printf("Incorrect signature\n");
 
-            fprintf(output, ELEMF"\n", number);
+    else {
+        fprintf(output, "%d\n", version);
+        fprintf(output, Signature);
+        fprintf(output, "\n");
 
-        }
+        char line[MAX_LINE_LEN] = "";
 
-        else if (strcmp(line, "add") == 0)    fprintf(output, "%d \n", ADD);
+        while (fscanf(input, "%s", line) > 0) {   //макс длина сканфа!!!
 
-        else if (strcmp(line, "sub") == 0)    fprintf(output, "%d \n", SUB);
+            if (strcmp(line, "push") == 0) {
 
-        else if (strcmp(line, "mul") == 0)    fprintf(output, "%d \n", MUL);
+                fprintf(output, "%d ", PUSH);
 
-        else if (strcmp(line, "div") == 0)    fprintf(output, "%d \n", DIV);
+                elem_t number = 0;
+                fscanf(input, ELEMF, &number);
 
-        else if (strcmp(line, "out") == 0)    fprintf(output, "%d \n", OUT);
+                fprintf(output, ELEMF"\n", number);
 
-        else if (strcmp(line, "in")  == 0)    fprintf(output, "%d \n", IN);
+            }
 
-        else if (strcmp(line, "hlt") == 0)    fprintf(output, "%d \n", HLT);
 
-        else {
-            printf("Compilation failled: incorrect command\n");
-            return IncorrectCommand;
+            else if (strcmp(line, "push_r") == 0) {
+
+                fprintf(output, "%d ", PUSH_R);
+
+                char reg[MAX_LINE_LEN] = "";
+                fscanf(input, "%s", reg);
+
+                if (strcmp(reg, "rax") == 0) fprintf(output, "%d \n", RAX);
+                else if (strcmp(reg, "rbx") == 0) fprintf(output, "%d \n", RBX);
+                else if (strcmp(reg, "rcx") == 0) fprintf(output, "%d \n", RCX);
+                else printf("Incorrect register");
+
+            }
+
+            else if (strcmp(line, "pop") == 0) {
+
+                fprintf(output, "%d ", POP);
+
+                char reg[MAX_LINE_LEN] = "";
+                fscanf(input, "%s", reg);
+
+                if (strcmp(reg, "rax") == 0) fprintf(output, "%d \n", RAX);
+                else if (strcmp(reg, "rbx") == 0) fprintf(output, "%d \n", RBX);
+                else if (strcmp(reg, "rcx") == 0) fprintf(output, "%d \n", RCX);
+                else printf("Incorrect register");
+
+            }
+
+            else if (strcmp(line, "add") == 0)    fprintf(output, "%d \n", ADD);
+
+            else if (strcmp(line, "sub") == 0)    fprintf(output, "%d \n", SUB);
+
+            else if (strcmp(line, "mul") == 0)    fprintf(output, "%d \n", MUL);
+
+            else if (strcmp(line, "div") == 0)    fprintf(output, "%d \n", DIV);
+
+            else if (strcmp(line, "out") == 0)    fprintf(output, "%d \n", OUT);
+
+            else if (strcmp(line, "in")  == 0)    fprintf(output, "%d \n", IN);
+
+            else if (strcmp(line, "hlt") == 0)    fprintf(output, "%d \n", HLT);
+
+            else {
+                printf("Compilation failed: incorrect command\n"); //fprintf stderr
+                return IncorrectCommand;
+            }
         }
     }
 

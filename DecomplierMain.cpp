@@ -11,7 +11,7 @@
 int main() {
 
     FILE* input = fopen("MachineCode2.txt", "r");
-    FILE* output = fopen("DecomplierOutput.txt", "w");
+    FILE* output = fopen("DecomplierOutput2.txt", "w");
 
     decomplier(input, output);
 

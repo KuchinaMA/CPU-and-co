@@ -10,7 +10,7 @@
 
 int main() {
 
-    FILE* input = fopen("Source.txt", "r");
+    FILE* input = fopen("Source2.txt", "r");
     FILE* output = fopen("MachineCode2.txt", "w");
 
     complier(input, output);
