@@ -52,10 +52,7 @@ int complier(FILE* input, FILE* output) {
                 char reg[MAX_LINE_LEN] = "";
                 fscanf(input, "%s", reg);
 
-                if (strcmp(reg, "rax") == 0) fprintf(output, "%d \n", RAX);
-                else if (strcmp(reg, "rbx") == 0) fprintf(output, "%d \n", RBX);
-                else if (strcmp(reg, "rcx") == 0) fprintf(output, "%d \n", RCX);
-                else printf("Incorrect register");
+                print_reg(reg, output);
 
             }
 
@@ -66,10 +63,7 @@ int complier(FILE* input, FILE* output) {
                 char reg[MAX_LINE_LEN] = "";
                 fscanf(input, "%s", reg);
 
-                if (strcmp(reg, "rax") == 0) fprintf(output, "%d \n", RAX);
-                else if (strcmp(reg, "rbx") == 0) fprintf(output, "%d \n", RBX);
-                else if (strcmp(reg, "rcx") == 0) fprintf(output, "%d \n", RCX);
-                else printf("Incorrect register");
+                print_reg(reg, output);
 
             }
 
@@ -94,5 +88,13 @@ int complier(FILE* input, FILE* output) {
         }
     }
 
+    return NoErrors;
+}
+
+int print_reg(char* line, FILE* output) {
+    if (strcmp(line, "rax") == 0) fprintf(output, "%d \n", RAX);
+    else if (strcmp(line, "rbx") == 0) fprintf(output, "%d \n", RBX);
+    else if (strcmp(line, "rcx") == 0) fprintf(output, "%d \n", RCX);
+    else printf("Incorrect register");
     return NoErrors;
 }

@@ -55,10 +55,7 @@ int decomplier(FILE* input, FILE* output) {
                     elem_t number = 0;
                     fscanf(input, ELEMF, &number);
 
-                    if (number == RAX) fprintf(output,"rax \n");
-                    else if (number == RBX) fprintf(output, "rbx \n");
-                    else if (number == RCX) fprintf(output, "rcx \n");
-                    else printf("Incorrect register");
+                    print_reg(number, output);
 
                     break;
                 }
@@ -70,10 +67,7 @@ int decomplier(FILE* input, FILE* output) {
                     elem_t number = 0;
                     fscanf(input, ELEMF, &number);
 
-                    if (number == RAX) fprintf(output, "rax \n");
-                    else if (number == RBX) fprintf(output, "rbx \n");
-                    else if (number == RCX) fprintf(output, "rcx \n");
-                    else printf("Incorrect register");
+                    print_reg(number, output);
 
                     break;
                 }
@@ -113,5 +107,13 @@ int decomplier(FILE* input, FILE* output) {
             }
         }
     }
+    return NoErrors;
+}
+
+int print_reg(int number, FILE* output) {
+    if (number == RAX) fprintf(output,"rax \n");
+    else if (number == RBX) fprintf(output, "rbx \n");
+    else if (number == RCX) fprintf(output, "rcx \n");
+    else printf("Incorrect register");
     return NoErrors;
 }

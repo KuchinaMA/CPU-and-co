@@ -15,5 +15,6 @@ enum DecomplierErrors {
 };
 
 int decomplier(FILE* input, FILE* output);
+int print_reg(int number, FILE* output);
 
 #endif // DECOMPLIER_H_INCLUDED

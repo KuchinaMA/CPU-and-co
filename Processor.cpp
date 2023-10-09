@@ -102,17 +102,11 @@ int cpu(struct Processor *proc) {
 
                     elem_t number = 0;
                     fscanf(proc->output, ELEMF, &number);
-                    //stack_push(&proc->stack, proc->registers[number]);
                     if (number == RAX || number == RBX || number == RCX)
                         stack_push(&proc->stack, proc->registers[number]);
 
                     else
                         printf("Incorrect register");
-
-                    /*if (number == RAX) stack_push(&proc->stack, proc->registers[number]);
-                    else if (number == RBX) fprintf(output, "rbx \n");
-                    else if (number == RCX) fprintf(output, "rcx \n");
-                    else printf("Incorrect register");*/
 
                     break;
                 }
