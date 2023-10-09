@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 const int MAX_LINE_LEN = 256;
+const int MAX_ARR_LEN = 200;
 
 enum COMMANDS {
     PUSH   = 1,
@@ -12,10 +13,10 @@ enum COMMANDS {
     MUL    = 4,
     DIV    = 5,
     OUT    = 6,
-    HLT    = 7,
-    IN     = 8,
-    POP    = 9,
-    PUSH_R = 10
+    IN     = 7,
+    POP    = 8,
+    PUSH_R = 9,
+    HLT    = -1,
 };
 
 enum Regs {
