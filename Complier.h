@@ -3,8 +3,6 @@
 
 #include <stdio.h>
 
-//static const int MAX_LINE_LEN = 256;
-
 const int ComplierVersion = 2;
 static const char *Signature = "mipt";
 
@@ -17,7 +15,7 @@ enum ComplierErrors {
 };
 
 int complier(FILE* input, FILE* output);
-int print_reg(char* line, FILE* output);
+int print_reg(char* line, int* codeArr, int position);
 int check_file(FILE* input, FILE* output);
 
 #endif // COMPLIER_H_INCLUDED
