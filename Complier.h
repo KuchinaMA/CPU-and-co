@@ -18,5 +18,6 @@ enum ComplierErrors {
 
 int complier(FILE* input, FILE* output);
 int print_reg(char* line, FILE* output);
+int check_file(FILE* input, FILE* output);
 
 #endif // COMPLIER_H_INCLUDED
