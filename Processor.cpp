@@ -65,7 +65,7 @@ int processor_dump(struct Processor *proc, const char *file, int line, const cha
 }
 
 
-int cpu(struct Processor *proc) {
+/*int cpu(struct Processor *proc) {
 
     processor_verify(proc);
 
@@ -81,6 +81,9 @@ int cpu(struct Processor *proc) {
     else if (strcmp(sign, Signature) != 0) printf("Incorrect signature\n");
 
     else {
+
+        int commands = 0;
+        fscanf(proc->output, "%d", &commands);
 
         int current = 0;
 
@@ -212,5 +215,149 @@ int cpu(struct Processor *proc) {
         processor_verify(proc);
 
         }
+    }
+} */
+
+
+int cpu(struct Processor *proc) {
+
+    processor_verify(proc);
+
+    int ncommands = 0;
+    fscanf(proc->output, "%d", &ncommands);
+    //int* codeArr = (int*)calloc(ncommands, sizeof(int));
+    //fread(codeArr, ncommands, sizeof(int), proc->output);
+
+    int current = 0;
+
+    for (size_t i = 0; i < ncommands; i++) {
+
+        fscanf(proc->output, "%d", &current);
+
+        switch(current) {
+
+            case PUSH: {
+
+                elem_t number = 0;
+                fscanf(proc->output, ELEMF, &number);
+                stack_push(&proc->stack, number);
+
+                //PRINT_STACK(&proc->stack);
+                break;
+            }
+
+            case PUSH_R: {
+
+                elem_t number = 0;
+                fscanf(proc->output, ELEMF, &number);
+                if (number == RAX || number == RBX || number == RCX)
+                    stack_push(&proc->stack, proc->registers[number]);
+
+                else
+                    printf("Incorrect register");
+
+                break;
+            }
+
+            case POP: {
+
+                elem_t number = 0;
+                fscanf(proc->output, ELEMF, &number);
+                if (number == RAX || number == RBX || number == RCX)
+                    stack_pop(&proc->stack, &proc->registers[number]);
+
+                else
+                    printf("Incorrect register");
+
+                break;
+            }
+
+            case ADD: {
+
+                elem_t second = 0;
+                stack_pop(&proc->stack, &second);
+
+                elem_t first = 0;
+                stack_pop(&proc->stack, &first);
+
+                elem_t newel = first + second;
+                stack_push(&proc->stack, newel);
+
+                //PRINT_STACK(&proc->stack);
+                break;
+            }
+
+            case SUB: {
+
+                elem_t second = 0;
+                stack_pop(&proc->stack, &second);
+
+                elem_t first = 0;
+                stack_pop(&proc->stack, &first);
+
+                elem_t newel = first - second;
+                stack_push(&proc->stack, newel);
+
+                //PRINT_STACK(&proc->stack);
+                break;
+            }
+
+            case MUL: {
+
+                elem_t second = 0;
+                stack_pop(&proc->stack, &second);
+
+                elem_t first = 0;
+                stack_pop(&proc->stack, &first);
+
+                elem_t newel = first * second;
+                stack_push(&proc->stack, newel);
+
+                //PRINT_STACK(&proc->stack);
+                break;
+            }
+
+            case DIV: {
+
+                elem_t second = 0;
+                stack_pop(&proc->stack, &second);
+
+                elem_t first = 0;
+                stack_pop(&proc->stack, &first);
+
+                elem_t newel = first / second;
+                stack_push(&proc->stack, newel);
+
+                //PRINT_STACK(&proc->stack);
+                break;
+            }
+
+            case OUT: {
+
+                elem_t answer = 0;
+                stack_pop(&proc->stack, &answer);
+                printf("\n Answer: "ELEMF"\n", answer);
+
+                //PRINT_STACK(&proc->stack);
+                break;
+            }
+
+            case IN: {
+
+                elem_t number = 0;
+                scanf(ELEMF, &number);
+                stack_push(&proc->stack, number);
+
+                //PRINT_STACK(&proc->stack);
+                break;
+            }
+
+            case HLT: {
+                return NoErrors;
+            }
+        }
+
+    processor_verify(proc);
+
     }
 }

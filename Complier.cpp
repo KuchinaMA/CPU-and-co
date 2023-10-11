@@ -96,18 +96,18 @@ int check_file(FILE* input, FILE* output) {
 
     if (version != ComplierVersion) {
         printf("Сompiler and data versions do not match\n");
-        return 1;
+        return 1;  //В будущем какая-то ошибка
     }
 
     else if (strcmp(sign, Signature) != 0) {
         printf("Incorrect signature\n");
-        return 1;
+        return 1; //тоже должна быть ошибка
     }
 
     else {
-        fprintf(output, "%d\n", version);
-        fprintf(output, Signature);
-        fprintf(output, "\n");
+        //fprintf(output, "%d\n", version);
+        //fprintf(output, Signature);
+        //fprintf(output, "\n");
         return NoErrors;
     }
 }

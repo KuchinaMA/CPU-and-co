@@ -29,6 +29,9 @@ int decomplier(FILE* input, FILE* output) {
         fprintf(output, "%d\n", version);
         fprintf(output, Signature);
         fprintf(output, "\n");
+        int commands = 0;
+        fscanf(input, "%d", &commands);
+        fprintf(output, "%d\n", commands);
 
         int current = 0;
 
