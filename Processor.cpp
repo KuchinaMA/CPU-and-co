@@ -66,208 +66,52 @@ int processor_dump(struct Processor *proc, const char *file, int line, const cha
 }
 
 
-/*int cpu(struct Processor *proc) {
-
-    processor_verify(proc);
-
-    int version = 0;
-    fscanf(proc->output, "%d", &version);
-
-    char sign[MAX_LINE_LEN] = "";
-    fscanf(proc->output, "%s", sign);
-
-
-    if (version != ProcessorVersion) printf("Processor and data versions do not match\n");
-
-    else if (strcmp(sign, Signature) != 0) printf("Incorrect signature\n");
-
-    else {
-
-        int commands = 0;
-        fscanf(proc->output, "%d", &commands);
-
-        int current = 0;
-
-        while (fscanf(proc->output, "%d", &current) > 0) {
-
-            switch(current) {
-
-                case PUSH: {
-
-                    elem_t number = 0;
-                    fscanf(proc->output, ELEMF, &number);
-                    stack_push(&proc->stack, number);
-
-                    //PRINT_STACK(&proc->stack);
-                    break;
-                }
-
-                case PUSH_R: {
-
-                    elem_t number = 0;
-                    fscanf(proc->output, ELEMF, &number);
-                    if (number == RAX || number == RBX || number == RCX)
-                        stack_push(&proc->stack, proc->registers[number]);
-
-                    else
-                        printf("Incorrect register");
-
-                    break;
-                }
-
-                case POP: {
-
-                    elem_t number = 0;
-                    fscanf(proc->output, ELEMF, &number);
-                    if (number == RAX || number == RBX || number == RCX)
-                        stack_pop(&proc->stack, &proc->registers[number]);
-
-                    else
-                        printf("Incorrect register");
-
-                    break;
-                }
-
-                case ADD: {
-
-                    elem_t second = 0;
-                    stack_pop(&proc->stack, &second);
-
-                    elem_t first = 0;
-                    stack_pop(&proc->stack, &first);
-
-                    elem_t newel = first + second;
-                    stack_push(&proc->stack, newel);
-
-                    //PRINT_STACK(&proc->stack);
-                    break;
-                }
-
-                case SUB: {
-
-                    elem_t second = 0;
-                    stack_pop(&proc->stack, &second);
-
-                    elem_t first = 0;
-                    stack_pop(&proc->stack, &first);
-
-                    elem_t newel = first - second;
-                    stack_push(&proc->stack, newel);
-
-                    //PRINT_STACK(&proc->stack);
-                    break;
-                }
-
-                case MUL: {
-
-                    elem_t second = 0;
-                    stack_pop(&proc->stack, &second);
-
-                    elem_t first = 0;
-                    stack_pop(&proc->stack, &first);
-
-                    elem_t newel = first * second;
-                    stack_push(&proc->stack, newel);
-
-                    //PRINT_STACK(&proc->stack);
-                    break;
-                }
-
-                case DIV: {
-
-                    elem_t second = 0;
-                    stack_pop(&proc->stack, &second);
-
-                    elem_t first = 0;
-                    stack_pop(&proc->stack, &first);
-
-                    elem_t newel = first / second;
-                    stack_push(&proc->stack, newel);
-
-                    //PRINT_STACK(&proc->stack);
-                    break;
-                }
-
-                case OUT: {
-
-                    elem_t answer = 0;
-                    stack_pop(&proc->stack, &answer);
-                    printf("\n Answer: "ELEMF"\n", answer);
-
-                    //PRINT_STACK(&proc->stack);
-                    break;
-                }
-
-                case IN: {
-
-                    elem_t number = 0;
-                    scanf(ELEMF, &number);
-                    stack_push(&proc->stack, number);
-
-                    //PRINT_STACK(&proc->stack);
-                    break;
-                }
-
-                case HLT: {
-                    return NoErrors;
-                }
-            }
-
-        processor_verify(proc);
-
-        }
-    }
-} */
-
-
 int cpu(struct Processor *proc) {
 
     processor_verify(proc);
 
     int ncommands = 0;
     fscanf(proc->output, "%d", &ncommands);
+    //fread(&ncommands, sizeof(int), 1, proc->output);
     printf("%d\n", ncommands);
 
-    //int* codeArr = (int*)calloc(ncommands, sizeof(int));
-    //int f = fread(codeArr, ncommands, sizeof(int), proc->output);
+    int* codeArr = (int*)calloc(ncommands, sizeof(int));
+    //int f = fread(codeArr, sizeof(int), ncommands, proc->output);
     //printf("%d\n", f);
-    //int codeArr[25] = {};
 
     int current = 0;
 
-    /*for (size_t i = 0; i < ncommands; i++) {
+    for (size_t i = 0; i < ncommands; i++) {
         fscanf(proc->output, "%d", &codeArr[i]);
     }
 
-    for (size_t i = 0; i < ncommands; i++) {
+    /*for (size_t i = 0; i < ncommands; i++) {
         printf("%d\n", codeArr[i]);
     }*/
 
     for (size_t i = 0; i < ncommands; i++) {
 
-        fscanf(proc->output, "%d", &current);
-        //current = codeArr[i];
-        //printf("%d\n", current);
+        current = codeArr[i];
 
         switch(current) {
 
             case PUSH: {
 
-                elem_t number = 0;
-                fscanf(proc->output, ELEMF, &number);
+                elem_t number = codeArr[i+1];
+                i++;
                 stack_push(&proc->stack, number);
 
-                PRINT_STACK(&proc->stack);
+                //PRINT_STACK(&proc->stack);
                 break;
             }
 
             case PUSH_R: {
 
-                elem_t number = 0;
-                fscanf(proc->output, ELEMF, &number);
-                if (number == RAX || number == RBX || number == RCX)
+                elem_t number = codeArr[i+1];
+                if (number == RAX || number == RBX || number == RCX) {
                     stack_push(&proc->stack, proc->registers[number]);
-
+                    i++;
+                }
                 else
                     printf("Incorrect register\n");
 
@@ -276,11 +120,11 @@ int cpu(struct Processor *proc) {
 
             case POP: {
 
-                elem_t number = 0;
-                fscanf(proc->output, ELEMF, &number);
-                if (number == RAX || number == RBX || number == RCX)
+                elem_t number = codeArr[i+1];
+                if (number == RAX || number == RBX || number == RCX) {
                     stack_pop(&proc->stack, &proc->registers[number]);
-
+                    i++;
+                }
                 else
                     printf("Incorrect register\n");
 
@@ -298,7 +142,7 @@ int cpu(struct Processor *proc) {
                 elem_t newel = first + second;
                 stack_push(&proc->stack, newel);
 
-                PRINT_STACK(&proc->stack);
+                //PRINT_STACK(&proc->stack);
                 break;
             }
 
@@ -313,7 +157,7 @@ int cpu(struct Processor *proc) {
                 elem_t newel = first - second;
                 stack_push(&proc->stack, newel);
 
-                PRINT_STACK(&proc->stack);
+                //PRINT_STACK(&proc->stack);
                 break;
             }
 
@@ -328,7 +172,7 @@ int cpu(struct Processor *proc) {
                 elem_t newel = first * second;
                 stack_push(&proc->stack, newel);
 
-                PRINT_STACK(&proc->stack);
+                //PRINT_STACK(&proc->stack);
                 break;
             }
 
@@ -343,7 +187,7 @@ int cpu(struct Processor *proc) {
                 elem_t newel = first / second;
                 stack_push(&proc->stack, newel);
 
-                PRINT_STACK(&proc->stack);
+                //PRINT_STACK(&proc->stack);
                 break;
             }
 
@@ -353,7 +197,7 @@ int cpu(struct Processor *proc) {
                 stack_pop(&proc->stack, &answer);
                 printf("\n Answer: "ELEMF"\n", answer);
 
-                PRINT_STACK(&proc->stack);
+                //PRINT_STACK(&proc->stack);
                 break;
             }
 
@@ -363,7 +207,7 @@ int cpu(struct Processor *proc) {
                 scanf(ELEMF, &number);
                 stack_push(&proc->stack, number);
 
-                PRINT_STACK(&proc->stack);
+                //PRINT_STACK(&proc->stack);
                 break;
             }
 
@@ -375,5 +219,5 @@ int cpu(struct Processor *proc) {
 
     }
 
-    //free(codeArr);
+    free(codeArr);
 }
