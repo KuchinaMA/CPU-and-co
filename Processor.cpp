@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 
@@ -225,14 +226,28 @@ int cpu(struct Processor *proc) {
 
     int ncommands = 0;
     fscanf(proc->output, "%d", &ncommands);
+    printf("%d\n", ncommands);
+
     //int* codeArr = (int*)calloc(ncommands, sizeof(int));
-    //fread(codeArr, ncommands, sizeof(int), proc->output);
+    //int f = fread(codeArr, ncommands, sizeof(int), proc->output);
+    //printf("%d\n", f);
+    //int codeArr[25] = {};
 
     int current = 0;
+
+    /*for (size_t i = 0; i < ncommands; i++) {
+        fscanf(proc->output, "%d", &codeArr[i]);
+    }
+
+    for (size_t i = 0; i < ncommands; i++) {
+        printf("%d\n", codeArr[i]);
+    }*/
 
     for (size_t i = 0; i < ncommands; i++) {
 
         fscanf(proc->output, "%d", &current);
+        //current = codeArr[i];
+        //printf("%d\n", current);
 
         switch(current) {
 
@@ -242,7 +257,7 @@ int cpu(struct Processor *proc) {
                 fscanf(proc->output, ELEMF, &number);
                 stack_push(&proc->stack, number);
 
-                //PRINT_STACK(&proc->stack);
+                PRINT_STACK(&proc->stack);
                 break;
             }
 
@@ -254,7 +269,7 @@ int cpu(struct Processor *proc) {
                     stack_push(&proc->stack, proc->registers[number]);
 
                 else
-                    printf("Incorrect register");
+                    printf("Incorrect register\n");
 
                 break;
             }
@@ -267,7 +282,7 @@ int cpu(struct Processor *proc) {
                     stack_pop(&proc->stack, &proc->registers[number]);
 
                 else
-                    printf("Incorrect register");
+                    printf("Incorrect register\n");
 
                 break;
             }
@@ -283,7 +298,7 @@ int cpu(struct Processor *proc) {
                 elem_t newel = first + second;
                 stack_push(&proc->stack, newel);
 
-                //PRINT_STACK(&proc->stack);
+                PRINT_STACK(&proc->stack);
                 break;
             }
 
@@ -298,7 +313,7 @@ int cpu(struct Processor *proc) {
                 elem_t newel = first - second;
                 stack_push(&proc->stack, newel);
 
-                //PRINT_STACK(&proc->stack);
+                PRINT_STACK(&proc->stack);
                 break;
             }
 
@@ -313,7 +328,7 @@ int cpu(struct Processor *proc) {
                 elem_t newel = first * second;
                 stack_push(&proc->stack, newel);
 
-                //PRINT_STACK(&proc->stack);
+                PRINT_STACK(&proc->stack);
                 break;
             }
 
@@ -328,7 +343,7 @@ int cpu(struct Processor *proc) {
                 elem_t newel = first / second;
                 stack_push(&proc->stack, newel);
 
-                //PRINT_STACK(&proc->stack);
+                PRINT_STACK(&proc->stack);
                 break;
             }
 
@@ -338,7 +353,7 @@ int cpu(struct Processor *proc) {
                 stack_pop(&proc->stack, &answer);
                 printf("\n Answer: "ELEMF"\n", answer);
 
-                //PRINT_STACK(&proc->stack);
+                PRINT_STACK(&proc->stack);
                 break;
             }
 
@@ -348,7 +363,7 @@ int cpu(struct Processor *proc) {
                 scanf(ELEMF, &number);
                 stack_push(&proc->stack, number);
 
-                //PRINT_STACK(&proc->stack);
+                PRINT_STACK(&proc->stack);
                 break;
             }
 
@@ -356,8 +371,9 @@ int cpu(struct Processor *proc) {
                 return NoErrors;
             }
         }
-
-    processor_verify(proc);
+        processor_verify(proc);
 
     }
+
+    //free(codeArr);
 }
