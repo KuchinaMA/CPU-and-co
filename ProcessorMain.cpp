@@ -14,7 +14,7 @@ int main() {
 
     struct Processor processor = {};
 
-    processor_ctor(&processor, "MachineCode2.txt");
+    processor_ctor(&processor, "MachineCode2.bin");
 
     processor_dump(&processor, __FILE__, __LINE__, __func__, stdout);
     //PRINT_STACK(&processor.stack);

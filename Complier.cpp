@@ -74,12 +74,12 @@ int complier(FILE* input, FILE* output) {
         }
     }
 
-    fprintf(output, "%d \n", position);
-    //fwrite(&position, sizeof(int), 1, output);
-    //fwrite(codeArr, sizeof(int), position, output);
-    for (int i = 0; i < position; i++) {
+    //fprintf(output, "%d \n", position);
+    fwrite(&position, sizeof(int), 1, output);
+    fwrite(codeArr, sizeof(int), position, output);
+    /*for (int i = 0; i < position; i++) {
         fprintf(output, "%d \n", codeArr[i]);
-    }
+    }*/
 
     free(codeArr);
 

@@ -20,7 +20,7 @@ int processor_ctor(struct Processor *proc, const char *file_name) {
         proc->registers[i] = 0;
     }
 
-    proc->output = fopen(file_name, "r");
+    proc->output = fopen(file_name, "rb");
 
     return NoErrors;
 }
@@ -71,23 +71,18 @@ int cpu(struct Processor *proc) {
     processor_verify(proc);
 
     int ncommands = 0;
-    fscanf(proc->output, "%d", &ncommands);
-    //fread(&ncommands, sizeof(int), 1, proc->output);
-    printf("%d\n", ncommands);
+    fread(&ncommands, sizeof(int), 1, proc->output);
+    //printf("%d\n", ncommands);
 
     int* codeArr = (int*)calloc(ncommands, sizeof(int));
-    //int f = fread(codeArr, sizeof(int), ncommands, proc->output);
+    int f = fread(codeArr, sizeof(int), ncommands, proc->output);
     //printf("%d\n", f);
 
     int current = 0;
 
-    for (size_t i = 0; i < ncommands; i++) {
-        fscanf(proc->output, "%d", &codeArr[i]);
-    }
-
     /*for (size_t i = 0; i < ncommands; i++) {
         printf("%d\n", codeArr[i]);
-    }*/
+    } */
 
     for (size_t i = 0; i < ncommands; i++) {
 
