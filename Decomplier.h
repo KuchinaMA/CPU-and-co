@@ -4,14 +4,13 @@
 #include <stdio.h>
 
 const int DecomplierVersion = 2;
-static const char *Signature = "mipt";
+//static const char *Signature = "mipt";
 
 enum DecomplierErrors {
-
-    //NoErrors         = 0,
-    IncorrectInput   = 1,
-    IncorrectOutput  = 1 << 1,
-    IncorrectCommand = 1 << 2
+    IncorrectInput    = 1,
+    IncorrectOutput   = 1 << 1,
+    IncorrectCommand  = 1 << 2,
+    IncorrectRegister = 1 << 3,
 };
 
 int decomplier(FILE* input, FILE* output);

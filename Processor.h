@@ -9,14 +9,8 @@ enum ProcessorErrors {
     WrongCommand  = 1 << 9
 };
 
-/*enum Regs {
-    RAX = 0,
-    RBX = 0,
-    RCX = 0
-};*/
-
 const int ProcessorVersion = 2;
-static const char *Signature = "mipt";
+//static const char *Signature = "mipt";
 const int NumRegs = 3;
 
 struct Processor {

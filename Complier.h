@@ -7,8 +7,6 @@ const int ComplierVersion = 2;
 static const char *Signature = "mipt";
 
 enum ComplierErrors {
-
-    //NoErrors         = 0,
     IncorrectInput   = 1,
     IncorrectOutput  = 1 << 1,
     IncorrectCommand = 1 << 2

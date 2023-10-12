@@ -32,11 +32,11 @@ enum Regs {
     FILE* dcoutput;
 };*/
 
-int read_commands(FILE *fp, Stack *stk); //интерпретатор
+//int read_commands(FILE *fp, Stack *stk); //интерпретатор
 //int complier(FILE *input, FILE *output);
-int complier(struct Processor *proc);
+//int complier(struct Processor *proc);
 //int decomplier(FILE *input, FILE *output);
-int decomplier(struct Processor *proc);
+//int decomplier(struct Processor *proc);
 //int cpu(FILE *input, Stack *stk);
 //int cpu(struct Processor *proc);
 

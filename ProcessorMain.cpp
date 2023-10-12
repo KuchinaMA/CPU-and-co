@@ -5,7 +5,7 @@
 #include "Stack.h"
 #include "Protection.h"
 
-#include "ReadCommands.h"
+//#include "ReadCommands.h"
 #include "Processor.h"
 
 int main() {

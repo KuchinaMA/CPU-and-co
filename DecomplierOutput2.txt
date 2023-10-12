@@ -1,5 +1,5 @@
-2
-mipt
+Number of commands is 25
+
 in
 pop rax 
 in

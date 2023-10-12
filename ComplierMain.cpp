@@ -5,7 +5,7 @@
 #include "Logfile.h"
 #include "Protection.h"
 
-#include "ReadCommands.h"
+//#include "ReadCommands.h"
 #include "Complier.h"
 
 int main() {
