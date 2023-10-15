@@ -66,32 +66,91 @@ int decomplier(FILE* input, FILE* output) {
                 break;
             }
 
-            case ADD: fprintf(output, "add\n");
-                      break;
+            case ADD:  fprintf(output, "add\n");
+                       break;
 
 
-            case SUB: fprintf(output, "sub\n");
-                          break;
+            case SUB:  fprintf(output, "sub\n");
+                       break;
 
 
-            case MUL: fprintf(output, "mul\n");
-                      break;
+            case MUL:  fprintf(output, "mul\n");
+                       break;
 
 
-            case DIV: fprintf(output, "div\n");
-                      break;
+            case DIV:  fprintf(output, "div\n");
+                       break;
 
 
-            case OUT: fprintf(output, "out\n");
-                      break;
+            case SQRT: fprintf(output, "sqrt\n");
+                       break;
 
 
-            case IN:  fprintf(output, "in\n");
-                      break;
+            case POW:  fprintf(output, "pow\n");
+                       break;
 
 
-            case HLT: fprintf(output, "hlt\n");
-                      break;
+
+
+            case SIN:  fprintf(output, "sin\n");
+                       break;
+
+
+            case COS:  fprintf(output, "cos\n");
+                       break;
+
+
+            case TAN:  fprintf(output, "tan\n");
+                       break;
+
+
+            case CTG:  fprintf(output, "ctg\n");
+                       break;
+
+
+
+
+            case MEOW: fprintf(output, "meow\n");
+                       break;
+
+
+            case BARK: fprintf(output, "bark\n");
+                       break;
+
+
+            case DUCK: fprintf(output, "duck\n");
+                       break;
+
+
+            case BOO:  fprintf(output, "boo\n");
+                       break;
+
+
+
+            case SOLVE: fprintf(output, "solve\n");
+                        break;
+
+
+            case SLEEP: fprintf(output, "sleep\n");
+                        break;
+
+
+            case MATAN: fprintf(output, "matan\n");
+                        break;
+
+
+
+            case OUT:  fprintf(output, "out\n");
+                       break;
+
+
+            case IN:   fprintf(output, "in\n");
+                       break;
+
+
+            case HLT:  fprintf(output, "hlt\n");
+                       break;
+
 
             default: {
                 printf("Decompilation failed: incorrect command\n");

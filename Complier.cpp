@@ -54,19 +54,49 @@ int complier(FILE* input, FILE* output) {
             print_reg(reg, codeArr, position++);
         }
 
-        else if (strcmp(line, "add") == 0)    codeArr[position++] = ADD;
+        else if (strcmp(line, "add") == 0)     codeArr[position++] = ADD;
 
-        else if (strcmp(line, "sub") == 0)    codeArr[position++] = SUB;
+        else if (strcmp(line, "sub") == 0)     codeArr[position++] = SUB;
 
-        else if (strcmp(line, "mul") == 0)    codeArr[position++] = MUL;
+        else if (strcmp(line, "mul") == 0)     codeArr[position++] = MUL;
 
-        else if (strcmp(line, "div") == 0)    codeArr[position++] = DIV;
+        else if (strcmp(line, "div") == 0)     codeArr[position++] = DIV;
 
-        else if (strcmp(line, "out") == 0)    codeArr[position++] = OUT;
+        else if (strcmp(line, "sqrt") == 0)    codeArr[position++] = SQRT;
 
-        else if (strcmp(line, "in")  == 0)    codeArr[position++] = IN;
+        else if (strcmp(line, "pow") == 0)     codeArr[position++] = POW;
 
-        else if (strcmp(line, "hlt") == 0)    codeArr[position++] = HLT;
+
+        else if (strcmp(line, "sin") == 0)     codeArr[position++] = SIN;
+
+        else if (strcmp(line, "cos") == 0)     codeArr[position++] = COS;
+
+        else if (strcmp(line, "tan") == 0)     codeArr[position++] = TAN;
+
+        else if (strcmp(line, "ctg") == 0)     codeArr[position++] = CTG;
+
+
+        else if (strcmp(line, "meow") == 0)    codeArr[position++] = MEOW;
+
+        else if (strcmp(line, "bark") == 0)    codeArr[position++] = BARK;
+
+        else if (strcmp(line, "duck") == 0)    codeArr[position++] = DUCK;
+
+        else if (strcmp(line, "boo") == 0)     codeArr[position++] = BOO;
+
+
+        else if (strcmp(line, "solve") == 0)    codeArr[position++] = SOLVE;
+
+        else if (strcmp(line, "sleep") == 0)    codeArr[position++] = SLEEP;
+
+        else if (strcmp(line, "matan") == 0)    codeArr[position++] = MATAN;
+
+
+        else if (strcmp(line, "out") == 0)     codeArr[position++] = OUT;
+
+        else if (strcmp(line, "in")  == 0)     codeArr[position++] = IN;
+
+        else if (strcmp(line, "hlt") == 0)     codeArr[position++] = HLT;
 
         else {
             printf("Compilation failed: incorrect command\n"); //fprintf stderr

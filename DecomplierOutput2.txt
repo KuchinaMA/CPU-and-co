@@ -1,4 +1,4 @@
-Number of commands is 25
+Number of commands is 27
 
 in
 pop rax 
@@ -16,4 +16,6 @@ mul
 mul
 sub
 out
+solve
+boo
 hlt

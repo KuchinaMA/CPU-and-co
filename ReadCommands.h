@@ -7,15 +7,34 @@ const int MAX_LINE_LEN = 256;
 const int MAX_ARR_LEN = 200;
 
 enum COMMANDS {
+
     PUSH   = 1,
-    ADD    = 2,
-    SUB    = 3,
-    MUL    = 4,
-    DIV    = 5,
-    OUT    = 6,
-    IN     = 7,
-    POP    = 8,
-    PUSH_R = 9,
+    PUSH_R = 2,
+    POP    = 3,
+    IN     = 4,
+    OUT    = 5,
+
+    ADD    = 10,
+    SUB    = 11,
+    MUL    = 12,
+    DIV    = 13,
+    SQRT   = 14,
+    POW    = 15,
+
+    SIN    = 20,
+    COS    = 21,
+    TAN    = 22,
+    CTG    = 23,
+
+    MEOW   = 30,
+    BARK   = 31,
+    DUCK   = 32,
+    BOO    = 33,
+
+    SOLVE  = 40,
+    SLEEP  = 41,
+    MATAN  = 42,
+
     HLT    = -1,
 };
 

@@ -26,4 +26,11 @@ int processor_dump(struct Processor *proc, const char *file, int line, const cha
 
 int cpu(struct Processor *proc);
 
+int arithmetic(int current, struct Processor *proc);
+
+int print_cat();
+int print_dog();
+int print_duck();
+int print_boo();
+
 #endif // PROCESSOR_H_INCLUDED

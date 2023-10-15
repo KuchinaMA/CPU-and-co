@@ -1,4 +1,4 @@
-2
+3
 mipt
 in
 pop rax
@@ -16,5 +16,7 @@ mul
 mul
 sub
 out
+solve
+boo
 hlt
  

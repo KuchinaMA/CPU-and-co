@@ -12,7 +12,7 @@ int main() {
 
     open_log("Stackerrors.log", __TIME__);
 
-    struct Processor processor = {};
+    Processor processor = {};
 
     processor_ctor(&processor, "MachineCode2.bin");
 

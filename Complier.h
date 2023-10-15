@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-const int ComplierVersion = 2;
+const int ComplierVersion = 3;
 static const char *Signature = "mipt";
 
 enum ComplierErrors {
