@@ -5,7 +5,6 @@
 #include "Stack.h"
 #include "Protection.h"
 
-//#include "ReadCommands.h"
 #include "Processor.h"
 
 int main() {
@@ -16,12 +15,9 @@ int main() {
 
     processor_ctor(&processor, "MachineCode2.bin");
 
-    processor_dump(&processor, __FILE__, __LINE__, __func__, stdout);
-    //PRINT_STACK(&processor.stack);
+    printf("Enter the coefficents of the quadratic equation\n");
 
     cpu(&processor);
-
-    //processor_dump(&processor, __FILE__, __LINE__, __func__, stdout);
 
     processor_dtor(&processor);
 

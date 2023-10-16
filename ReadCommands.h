@@ -1,12 +1,15 @@
 #ifndef READCOMMANDS_H_INCLUDED
 #define READCOMMANDS_H_INCLUDED
 
+#define DEF_CMD(name, number, args) \
+    name = number,
+
 #include <stdio.h>
 
 const int MAX_LINE_LEN = 256;
 const int MAX_ARR_LEN = 200;
 
-enum COMMANDS {
+/*enum COMMANDS {
 
     PUSH   = 1,
     PUSH_R = 2,
@@ -36,7 +39,13 @@ enum COMMANDS {
     MATAN  = 42,
 
     HLT    = -1,
+}; */
+
+enum Commands {
+    #include "Commands.h"
 };
+
+#undef DEF_CMD
 
 enum Regs {
     RAX = 0,
@@ -44,19 +53,5 @@ enum Regs {
     RCX = 2
 };
 
-/*struct Processor {
-    struct Stack stack;
-    FILE* input;
-    FILE* output;
-    FILE* dcoutput;
-};*/
-
-//int read_commands(FILE *fp, Stack *stk); //интерпретатор
-//int complier(FILE *input, FILE *output);
-//int complier(struct Processor *proc);
-//int decomplier(FILE *input, FILE *output);
-//int decomplier(struct Processor *proc);
-//int cpu(FILE *input, Stack *stk);
-//int cpu(struct Processor *proc);
 
 #endif // READCOMMANDS_H_INCLUDED
