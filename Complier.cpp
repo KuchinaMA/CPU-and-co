@@ -10,15 +10,15 @@
 #include "Complier.h"
 
 
-#define DEF_CMD(name, number, argument)          \
+#define DEF_CMD(name, number, argument, code)    \
     if (strcmp(line, #name) == 0) {              \
         codeArr[position++] = name;              \
-        if (argument == NumArg) {                     \
+        if (argument == NumArg) {                \
         elem_t num = 0;                          \
             fscanf(input, ELEMF, &num);          \
             codeArr[position++] = num;           \
         }                                        \
-        else if (argument == RegArg) {                \
+        else if (argument == RegArg) {           \
             char reg[MAX_LINE_LEN] = "";         \
             fscanf(input, "%s", reg);            \
             print_reg(reg, codeArr, position++); \
@@ -58,6 +58,8 @@ int complier(FILE* input, FILE* output) {
 
     return NoErrors;
 }
+
+#undef DEF_CMD
 
 
 int check_file(FILE* input, FILE* output) {

@@ -9,6 +9,19 @@
 #include "ReadCommands.h"
 #include "Decomplier.h"
 
+#define DEF_CMD(name, number, argument, code)   \
+    case name:                                  \
+    fprintf(output, #name"\n");                 \
+    if (argument > 0) {                         \
+        elem_t num = codeArr[i+1];              \
+        i++;                                    \
+        if (argument == NumArg)                 \
+            fprintf(output, ELEMF"\n", num);    \
+        if (argument == RegArg)                 \
+            print_reg(num, output);             \
+    }                                           \
+    break;
+
 
 int decomplier(FILE* input, FILE* output) {
 
@@ -29,128 +42,9 @@ int decomplier(FILE* input, FILE* output) {
 
         current = codeArr[i];
 
-        //printf("%d\n", current);
-
         switch(current) {
 
-            case PUSH: {
-
-                fprintf(output, "push ");
-                elem_t number = codeArr[i+1];
-                i++;
-
-                fprintf(output, ELEMF"\n", number);
-
-                break;
-            }
-
-            case PUSH_R: {
-
-                fprintf(output, "push_r ");
-                elem_t number = codeArr[i+1];
-                i++;
-
-                print_reg(number, output);
-
-                break;
-            }
-
-            case POP: {
-
-                fprintf(output, "pop ");
-                elem_t number = codeArr[i+1];
-                i++;
-
-                print_reg(number, output);
-
-                break;
-            }
-
-            case ADD:  fprintf(output, "add\n");
-                       break;
-
-
-            case SUB:  fprintf(output, "sub\n");
-                       break;
-
-
-            case MUL:  fprintf(output, "mul\n");
-                       break;
-
-
-            case DIV:  fprintf(output, "div\n");
-                       break;
-
-
-            case SQRT: fprintf(output, "sqrt\n");
-                       break;
-
-
-            case POW:  fprintf(output, "pow\n");
-                       break;
-
-
-
-
-            case SIN:  fprintf(output, "sin\n");
-                       break;
-
-
-            case COS:  fprintf(output, "cos\n");
-                       break;
-
-
-            case TAN:  fprintf(output, "tan\n");
-                       break;
-
-
-            case CTG:  fprintf(output, "ctg\n");
-                       break;
-
-
-
-
-            case MEOW: fprintf(output, "meow\n");
-                       break;
-
-
-            case BARK: fprintf(output, "bark\n");
-                       break;
-
-
-            case DUCK: fprintf(output, "duck\n");
-                       break;
-
-
-            case BOO:  fprintf(output, "boo\n");
-                       break;
-
-
-
-            case SOLVE: fprintf(output, "solve\n");
-                        break;
-
-
-            case SLEEP: fprintf(output, "sleep\n");
-                        break;
-
-
-            case MATAN: fprintf(output, "matan\n");
-                        break;
-
-
-
-            case OUT:  fprintf(output, "out\n");
-                       break;
-
-
-            case IN:   fprintf(output, "in\n");
-                       break;
-
-
-            case HLT:  fprintf(output, "hlt\n");
-                       break;
-
+            #include "Commands.h"
 
             default: {
                 printf("Decompilation failed: incorrect command\n");
@@ -162,6 +56,7 @@ int decomplier(FILE* input, FILE* output) {
     return NoErrors;
 }
 
+#undef DEF_CMD
 
 
 int print_reg(int number, FILE* output) {

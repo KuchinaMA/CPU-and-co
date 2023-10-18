@@ -1,7 +1,7 @@
 #ifndef READCOMMANDS_H_INCLUDED
 #define READCOMMANDS_H_INCLUDED
 
-#define DEF_CMD(name, number, args) \
+#define DEF_CMD(name, number, args, code) \
     name = number,
 
 #include <stdio.h>

@@ -11,6 +11,11 @@
 #include "ReadCommands.h"
 #include "Processor.h"
 
+#define DEF_CMD(name, number, argument, code) \
+    case name:                                \
+    code                                      \
+    break;
+
 
 int processor_ctor(struct Processor *proc, const char *file_name) {
 
@@ -81,265 +86,21 @@ int cpu(struct Processor *proc) {
 
     int current = 0;
 
-    /*for (size_t i = 0; i < ncommands; i++) {
-        printf("%d\n", codeArr[i]);
-    } */
-
     for (size_t i = 0; i < ncommands; i++) {
 
         current = codeArr[i];
 
         switch(current) {
 
-            case PUSH: {
-
-                elem_t number = codeArr[i+1];
-                i++;
-                stack_push(&proc->stack, number);
-
-                //PRINT_STACK(&proc->stack);
-                break;
-            }
-
-            case PUSH_R: {
-
-                elem_t number = codeArr[i+1];
-                if (number == RAX || number == RBX || number == RCX) {
-                    stack_push(&proc->stack, proc->registers[number]);
-                    i++;
-                }
-                else
-                    printf("Incorrect register\n");
-
-                break;
-            }
-
-            case POP: {
-
-                elem_t number = codeArr[i+1];
-                if (number == RAX || number == RBX || number == RCX) {
-                    stack_pop(&proc->stack, &proc->registers[number]);
-                    i++;
-                }
-                else
-                    printf("Incorrect register\n");
-
-                break;
-            }
-
-            case ADD: {
-
-                elem_t second = 0;
-                stack_pop(&proc->stack, &second);
-
-                elem_t first = 0;
-                stack_pop(&proc->stack, &first);
-
-                elem_t newel = first + second;
-                stack_push(&proc->stack, newel);
-
-                //PRINT_STACK(&proc->stack);
-                break;
-            }
-
-            case SUB: {
-
-                elem_t second = 0;
-                stack_pop(&proc->stack, &second);
-
-                elem_t first = 0;
-                stack_pop(&proc->stack, &first);
-
-                elem_t newel = first - second;
-                stack_push(&proc->stack, newel);
-
-                //PRINT_STACK(&proc->stack);
-                break;
-            }
-
-            case MUL: {
-
-                elem_t second = 0;
-                stack_pop(&proc->stack, &second);
-
-                elem_t first = 0;
-                stack_pop(&proc->stack, &first);
-
-                elem_t newel = first * second;
-                stack_push(&proc->stack, newel);
-
-                //PRINT_STACK(&proc->stack);
-                break;
-            }
-
-            case DIV: {
-
-                elem_t second = 0;
-                stack_pop(&proc->stack, &second);
-
-                elem_t first = 0;
-                stack_pop(&proc->stack, &first);
-
-                elem_t newel = first / second;
-                stack_push(&proc->stack, newel);
-
-                //PRINT_STACK(&proc->stack);
-                break;
-            }
-
-            case POW: {
-
-                elem_t second = 0;
-                stack_pop(&proc->stack, &second);
-
-                elem_t first = 0;
-                stack_pop(&proc->stack, &first);
-
-                elem_t newel = pow(first,second);
-                stack_push(&proc->stack, newel);
-
-                //PRINT_STACK(&proc->stack);
-                break;
-            }
-
-
-            case SQRT: {
-
-                elem_t number = 0;
-                stack_pop(&proc->stack, &number);
-
-                elem_t newel = sqrt(number);
-                stack_push(&proc->stack, newel);
-
-                //PRINT_STACK(&proc->stack);
-                break;
-            }
-
-
-
-            case SIN: {
-
-                elem_t number = 0;
-                stack_pop(&proc->stack, &number);
-
-                elem_t newel = sin(number);
-                stack_push(&proc->stack, newel);
-
-                //PRINT_STACK(&proc->stack);
-                break;
-            }
-
-            case COS: {
-
-                elem_t number = 0;
-                stack_pop(&proc->stack, &number);
-
-                elem_t newel = cos(number);
-                stack_push(&proc->stack, newel);
-
-                //PRINT_STACK(&proc->stack);
-                break;
-            }
-
-            case TAN: {
-
-                elem_t number = 0;
-                stack_pop(&proc->stack, &number);
-
-                elem_t newel = tan(number);
-                stack_push(&proc->stack, newel);
-
-                //PRINT_STACK(&proc->stack);
-                break;
-            }
-
-            case CTG: {
-
-                elem_t number = 0;
-                stack_pop(&proc->stack, &number);
-
-                elem_t newel = 1 / tan(number);
-                stack_push(&proc->stack, newel);
-
-                //PRINT_STACK(&proc->stack);
-                break;
-            }
-
-
-            case MEOW: {
-
-                print_cat();
-                break;
-            }
-
-            case BARK: {
-
-                print_dog();
-                break;
-            }
-
-            case DUCK: {
-
-                print_duck();
-                break;
-            }
-
-            case BOO: {
-
-                print_boo();
-                break;
-            }
-
-
-            case SOLVE: {
-
-                printf("I can count the discriminant!\n"); //здесь должна была быть говорилка, но что-то пошло не так:(
-                break;
-            }
-
-            case SLEEP: {
-
-                printf("Stop boting, it's time to sleep\n");
-                break;
-            }
-
-            case MATAN: {
-
-                printf("There's no tine to sleep, you need to botat' matan\n");
-                break;
-            }
-
-
-            case OUT: {
-
-                elem_t answer = 0;
-                stack_pop(&proc->stack, &answer);
-                printf("\n Answer: "ELEMF"\n", answer);
-
-                //PRINT_STACK(&proc->stack);
-                break;
-            }
-
-            case IN: {
-
-                elem_t number = 0;
-                scanf(ELEMF, &number);
-                stack_push(&proc->stack, number);
-
-                //PRINT_STACK(&proc->stack);
-                break;
-            }
-
-            case HLT: {
-                return NoErrors;
-            }
+            #include "Commands.h"
         }
-        processor_verify(proc);
-
     }
-
     free(codeArr);
+    return NoErrors;
 }
+
+
+#undef DEF_CMD
 
 
 int print_cat() {
