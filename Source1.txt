@@ -1,13 +1,21 @@
-2
+3
 mipt
-in
-in
-mul
-push 4
-in
-in
-mul
-mul
-sub
-out
-hlt
+IN
+POP rax
+IN
+POP rbx
+IN 
+POP rcx
+PUSH_R rbx
+PUSH_R rbx
+MUL
+PUSH 4
+PUSH_R rax
+PUSH_R rcx
+MUL
+MUL
+SUB
+OUT
+SOLVE
+BOO
+HLT

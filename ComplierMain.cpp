@@ -9,7 +9,7 @@
 
 int main() {
 
-    FILE* input = fopen("Source2.txt", "r");
+    FILE* input = fopen("Source1.txt", "r");
     FILE* output = fopen("MachineCode2.bin", "wb");
 
     complier(input, output);

@@ -9,6 +9,25 @@
 #include "ReadCommands.h"
 #include "Complier.h"
 
+
+#define DEF_CMD(name, number, argument)          \
+    if (strcmp(line, #name) == 0) {              \
+        codeArr[position++] = name;              \
+        if (argument == NumArg) {                     \
+        elem_t num = 0;                          \
+            fscanf(input, ELEMF, &num);          \
+            codeArr[position++] = num;           \
+        }                                        \
+        else if (argument == RegArg) {                \
+            char reg[MAX_LINE_LEN] = "";         \
+            fscanf(input, "%s", reg);            \
+            print_reg(reg, codeArr, position++); \
+        }                                        \
+    }                                            \
+    else
+
+
+
 int complier(FILE* input, FILE* output) {
 
     assert(input != NULL);
@@ -23,82 +42,10 @@ int complier(FILE* input, FILE* output) {
 
     while (fscanf(input, "%s", line) > 0) {   //макс длина сканфа!!!
 
-        if (strcmp(line, "push") == 0) {
+        #include "Commands.h"
 
-            codeArr[position++] = PUSH;
+        /*else*/ {
 
-            elem_t number = 0;
-            fscanf(input, ELEMF, &number);
-
-            codeArr[position++] = number;
-        }
-
-
-        else if (strcmp(line, "push_r") == 0) {
-
-            codeArr[position++] = PUSH_R;
-
-            char reg[MAX_LINE_LEN] = "";
-            fscanf(input, "%s", reg);
-
-            print_reg(reg, codeArr, position++);
-        }
-
-        else if (strcmp(line, "pop") == 0) {
-
-            codeArr[position++] = POP;
-
-            char reg[MAX_LINE_LEN] = "";
-            fscanf(input, "%s", reg);
-
-            print_reg(reg, codeArr, position++);
-        }
-
-        else if (strcmp(line, "add") == 0)     codeArr[position++] = ADD;
-
-        else if (strcmp(line, "sub") == 0)     codeArr[position++] = SUB;
-
-        else if (strcmp(line, "mul") == 0)     codeArr[position++] = MUL;
-
-        else if (strcmp(line, "div") == 0)     codeArr[position++] = DIV;
-
-        else if (strcmp(line, "sqrt") == 0)    codeArr[position++] = SQRT;
-
-        else if (strcmp(line, "pow") == 0)     codeArr[position++] = POW;
-
-
-        else if (strcmp(line, "sin") == 0)     codeArr[position++] = SIN;
-
-        else if (strcmp(line, "cos") == 0)     codeArr[position++] = COS;
-
-        else if (strcmp(line, "tan") == 0)     codeArr[position++] = TAN;
-
-        else if (strcmp(line, "ctg") == 0)     codeArr[position++] = CTG;
-
-
-        else if (strcmp(line, "meow") == 0)    codeArr[position++] = MEOW;
-
-        else if (strcmp(line, "bark") == 0)    codeArr[position++] = BARK;
-
-        else if (strcmp(line, "duck") == 0)    codeArr[position++] = DUCK;
-
-        else if (strcmp(line, "boo") == 0)     codeArr[position++] = BOO;
-
-
-        else if (strcmp(line, "solve") == 0)    codeArr[position++] = SOLVE;
-
-        else if (strcmp(line, "sleep") == 0)    codeArr[position++] = SLEEP;
-
-        else if (strcmp(line, "matan") == 0)    codeArr[position++] = MATAN;
-
-
-        else if (strcmp(line, "out") == 0)     codeArr[position++] = OUT;
-
-        else if (strcmp(line, "in")  == 0)     codeArr[position++] = IN;
-
-        else if (strcmp(line, "hlt") == 0)     codeArr[position++] = HLT;
-
-        else {
             printf("Compilation failed: incorrect command\n"); //fprintf stderr
             return IncorrectCommand;
         }
