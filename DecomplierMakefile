@@ -14,7 +14,7 @@ DecomplierRes.exe: DecomplierMain.o Decomplier.o
 DecomplierMain.o: DecomplierMain.cpp Stack.h Types.h Logfile.h Protection.h ReadCommands.h Decomplier.h
 	$(CC) $(CFLAGS) $< -c -o $@
 
-Decomplier.o: Decomplier.cpp Stack.h Types.h Logfile.h Protection.h ReadCommands.h Decomplier.h
+Decomplier.o: Decomplier.cpp Stack.h Types.h Logfile.h Protection.h ReadCommands.h Decomplier.h Commands.h
 	$(CC) $(CFLAGS) $< -c -o $@
 
 .PHONY: all clean

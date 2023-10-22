@@ -10,8 +10,8 @@
 
 int main() {
 
-    FILE* input = fopen("MachineCode2.bin", "rb");
-    FILE* output = fopen("DecomplierOutput2.txt", "w");
+    FILE* input = fopen("MachineCode3.bin", "rb");
+    FILE* output = fopen("DecomplierOutput3.txt", "w");
 
     decomplier(input, output);
 

@@ -19,12 +19,14 @@ enum Commands {
 enum Regs {
     RAX = 0,
     RBX = 1,
-    RCX = 2
+    RCX = 2,
+    RDX = 3
 };
 
 enum TypeArgs {
     NumArg = 1,
     RegArg = 2,
+    JmpArg = 3
 };
 
 

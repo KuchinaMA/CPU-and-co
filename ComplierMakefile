@@ -14,7 +14,7 @@ ComplierRes.exe: ComplierMain.o Complier.o
 ComplierMain.o: ComplierMain.cpp Stack.h Types.h Logfile.h Protection.h readCommands.h Complier.h
 	$(CC) $(CFLAGS) $< -c -o $@
 
-Complier.o: Complier.cpp Stack.h Types.h Logfile.h Protection.h readCommands.h Complier.h
+Complier.o: Complier.cpp Stack.h Types.h Logfile.h Protection.h readCommands.h Complier.h Commands.h
 	$(CC) $(CFLAGS) $< -c -o $@
 
 .PHONY: all clean

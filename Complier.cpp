@@ -23,12 +23,18 @@
             fscanf(input, "%s", reg);            \
             print_reg(reg, codeArr, position++); \
         }                                        \
+        else if (argument == JmpArg) {           \
+            char label[MAX_LINE_LEN] = "";       \
+            fscanf(input, "%s", label);          \
+            int adress = label[1] - '0';         \
+            codeArr[position++] = labels[adress];\
+        }                                        \
     }                                            \
     else
 
 
 
-int complier(FILE* input, FILE* output) {
+int complier(FILE* input, FILE* output, int *labels) {
 
     assert(input != NULL);
     assert(output != NULL);
@@ -42,12 +48,19 @@ int complier(FILE* input, FILE* output) {
 
     while (fscanf(input, "%s", line) > 0) {   //макс длина сканфа!!!
 
-        #include "Commands.h"
+        if (line[0] == ':')  {
+            labels[line[1] - '0'] = position;
+        }
 
-        /*else*/ {
+        else {
 
-            printf("Compilation failed: incorrect command\n"); //fprintf stderr
-            return IncorrectCommand;
+            #include "Commands.h"
+
+            /*else*/ {
+
+                printf("Compilation failed: incorrect command\n"); //fprintf stderr
+                return IncorrectCommand;
+            }
         }
     }
 
@@ -73,12 +86,12 @@ int check_file(FILE* input, FILE* output) {
 
     if (version != ComplierVersion) {
         printf("Сompiler and data versions do not match\n");
-        return 1;  //В будущем какая-то ошибка
+        return InvalidVersion;
     }
 
-    else if (strcmp(sign, Signature) != 0) {
+    else if (strcmp(sign, Signature)) {
         printf("Incorrect signature\n");
-        return 1; //тоже должна быть ошибка
+        return InvalidSignature;
     }
 
     else {
@@ -99,6 +112,8 @@ int print_reg(char* line, int* codeArr, int position) {
     else if (strcmp(line, "rbx") == 0) codeArr[position] = RBX;
 
     else if (strcmp(line, "rcx") == 0) codeArr[position] = RCX;
+
+    else if (strcmp(line, "rdx") == 0) codeArr[position] = RDX;
 
     else printf("Incorrect register");
 

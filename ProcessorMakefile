@@ -11,7 +11,7 @@ all: ProcessorRes.exe
 ProcessorRes.exe: ProcessorMain.o Stack.o Logfile.o Protection.o ReadCommands.o Processor.o
 	$(CC) $(CFLAGS) $^ -o $@
 
-ProcessorMain.o: ProcessorMain.cpp Stack.h Types.h Logfile.h Protection.h ReadCommands.h Processor.h
+ProcessorMain.o: ProcessorMain.cpp Types.h Logfile.h Stack.h Protection.h ReadCommands.h Processor.h
 	$(CC) $(CFLAGS) $< -c -o $@
 
 Stack.o: Stack.cpp Stack.h Types.h Protection.h Logfile.h
@@ -26,7 +26,7 @@ Protection.o: Protection.cpp Protection.h Stack.h Types.h Logfile.h
 ReadCommands.o: ReadCommands.cpp ReadCommands.h Stack.h Types.h
 	$(CC) $(CFLAGS) $< -c -o $@ 
 
-Processor.o: Processor.cpp Stack.h Types.h Logfile.h Protection.h ReadCommands.h Processor.h
+Processor.o: Processor.cpp Stack.h Types.h Logfile.h Protection.h ReadCommands.h Processor.h Commands.h
 	$(CC) $(CFLAGS) $< -c -o $@
 
 .PHONY: all clean

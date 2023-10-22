@@ -9,10 +9,14 @@
 
 int main() {
 
-    FILE* input = fopen("Source1.txt", "r");
-    FILE* output = fopen("MachineCode2.bin", "wb");
+    FILE* input = fopen("Source3.txt", "r");
+    FILE* output = fopen("MachineCode3.bin", "wb");
 
-    complier(input, output);
+    int labels[10] = {};
+    for (int i = 0; i < 10; i++)
+        labels[i] = -1;
+
+    complier(input, output, labels);
 
     fclose(input);
     fclose(output);

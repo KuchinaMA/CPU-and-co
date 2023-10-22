@@ -1,0 +1,17 @@
+3
+mipt
+PUSH 1
+POP rax
+:3
+PUSH_R rax
+PUSH_R rax
+MUL
+OUT
+PUSH_R rax
+PUSH 1
+ADD
+POP rax
+PUSH_R rax
+PUSH 10
+JB :3
+HLT

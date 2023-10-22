@@ -19,6 +19,8 @@
             fprintf(output, ELEMF"\n", num);    \
         if (argument == RegArg)                 \
             print_reg(num, output);             \
+        if (argument == JmpArg)                 \
+            fprintf(output, ELEMF"\n", num);    \
     }                                           \
     break;
 
@@ -63,6 +65,7 @@ int print_reg(int number, FILE* output) {
     if (number == RAX) fprintf(output,"rax \n");
     else if (number == RBX) fprintf(output, "rbx \n");
     else if (number == RCX) fprintf(output, "rcx \n");
+    else if (number == RDX) fprintf(output, "rdx \n");
     else {
         printf("Incorrect register");
         return IncorrectRegister;

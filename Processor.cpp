@@ -19,6 +19,9 @@
 
 int processor_ctor(struct Processor *proc, const char *file_name) {
 
+    assert(proc != NULL);
+    assert(file_name != NULL);
+
     STACK_CONSTRUCT(stk, StackDefaultCapacity);
     proc->stack = stk;
 
@@ -85,14 +88,18 @@ int cpu(struct Processor *proc) {
     //printf("%d\n", f);
 
     int current = 0;
+    int ip = 0;
 
-    for (size_t i = 0; i < ncommands; i++) {
+    while(true) {
 
-        current = codeArr[i];
+        current = codeArr[ip];
 
         switch(current) {
 
             #include "Commands.h"
+
+        default:
+            return WrongCommand;
         }
     }
     free(codeArr);
