@@ -14,8 +14,8 @@ enum ComplierErrors {
     InvalidSignature = 1 << 4
 };
 
-//int complier(FILE* input, FILE* output);
-int complier(FILE* input, FILE* output, int *labels);
+int complier(FILE* input, FILE* output);
+//int complier(FILE* input, FILE* output, int *labels);
 int print_reg(char* line, int* codeArr, int position);
 int check_file(FILE* input, FILE* output);
 

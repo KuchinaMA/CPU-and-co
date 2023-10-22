@@ -34,7 +34,7 @@
 
 
 
-int complier(FILE* input, FILE* output, int *labels) {
+int complier(FILE* input, FILE* output) {
 
     assert(input != NULL);
     assert(output != NULL);
@@ -43,6 +43,10 @@ int complier(FILE* input, FILE* output, int *labels) {
 
     int *codeArr = (int*)calloc(MAX_ARR_LEN, sizeof(int));
     int position = 0;
+
+    int labels[10] = {};
+    for (int i = 0; i < 10; i++)
+        labels[i] = -1;
 
     char line[MAX_LINE_LEN] = "";
 
@@ -64,7 +68,32 @@ int complier(FILE* input, FILE* output, int *labels) {
         }
     }
 
+    for (int i = 0; i < 30; i++)
+        printf("%d\n", codeArr[i]);
+    position = 0;
+    fseek(input, 9, SEEK_SET); //пропускаем сигнатуру и версию и сканируем файл ещё раз
+
+    while (fscanf(input, "%s", line) > 0) {
+
+        if (line[0] == ':')  {
+            labels[line[1] - '0'] = position;
+        }
+
+        else {
+
+            #include "Commands.h"
+
+            /*else*/ {
+
+                printf("Compilation failed: incorrect command\n");
+                return IncorrectCommand;
+            }
+        }
+    }
+
     fwrite(&position, sizeof(int), 1, output);
+    for (int i = 0; i < 30; i++)
+        printf("%d\n", codeArr[i]);
     fwrite(codeArr, sizeof(int), position, output);
 
     free(codeArr);
