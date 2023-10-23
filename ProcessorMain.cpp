@@ -13,7 +13,7 @@ int main() {
 
     Processor processor = {};
 
-    processor_ctor(&processor, "MachineCode3.bin");
+    processor_ctor(&processor, "MachineCode4.bin");
 
     //printf("Enter the coefficents of the quadratic equation\n");
 

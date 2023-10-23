@@ -42,53 +42,27 @@ DEF_CMD(OUT, 5, 0, {
     ip++;
     })
 
-DEF_CMD(ADD, 10, 0, {
-    elem_t second = 0;
-    stack_pop(&proc->stack, &second);
 
-    elem_t first = 0;
-    stack_pop(&proc->stack, &first);
-
-    elem_t newel = first + second;
-    stack_push(&proc->stack, newel);
-    ip++;
+#define DEF_ARITHM(name, numb, operation)  \
+DEF_CMD(name, numb, 0, {                   \
+    elem_t second = 0;                     \
+    stack_pop(&proc->stack, &second);      \
+                                           \
+    elem_t first = 0;                      \
+    stack_pop(&proc->stack, &first);       \
+                                           \
+    elem_t newel = first operation second; \
+    stack_push(&proc->stack, newel);       \
+    ip++;                                  \
     })
 
-DEF_CMD(SUB, 11, 0, {
-    elem_t second = 0;
-    stack_pop(&proc->stack, &second);
+DEF_ARITHM(ADD, 10, +)
+DEF_ARITHM(SUB, 11, -)
+DEF_ARITHM(MUL, 12, *)
+DEF_ARITHM(DIV, 13, /)
 
-    elem_t first = 0;
-    stack_pop(&proc->stack, &first);
+#undef DEF_ARITHM
 
-    elem_t newel = first - second;
-    stack_push(&proc->stack, newel);
-    ip++;
-    })
-
-DEF_CMD(MUL, 12, 0, {
-    elem_t second = 0;
-    stack_pop(&proc->stack, &second);
-
-    elem_t first = 0;
-    stack_pop(&proc->stack, &first);
-
-    elem_t newel = first * second;
-    stack_push(&proc->stack, newel);
-    ip++;
-    })
-
-DEF_CMD(DIV, 13, 0, {
-    elem_t second = 0;
-    stack_pop(&proc->stack, &second);
-
-    elem_t first = 0;
-    stack_pop(&proc->stack, &first);
-
-    elem_t newel = first / second;
-    stack_push(&proc->stack, newel);
-    ip++;
-    })
 
 DEF_CMD(SQRT, 14, 0, {
     elem_t number = 0;
@@ -194,71 +168,26 @@ DEF_CMD(JMP, 50, 3, {
     ip = codeArr[ip+1];
     })
 
-DEF_CMD(JB, 51, 3, {
-    elem_t lim = 0;
-    stack_pop(&proc->stack, &lim);
-    elem_t cur = 0;
-    stack_pop(&proc->stack, &cur);
-    if (cur < lim) {
-        ip = codeArr[ip+1];
-    }
-    else ip += 2;
+
+#define DEF_CONDITIONAL_JMP(name, numb, operation) \
+DEF_CMD(name, numb, 3, {                           \
+    elem_t lim = 0;                                \
+    stack_pop(&proc->stack, &lim);                 \
+    elem_t cur = 0;                                \
+    stack_pop(&proc->stack, &cur);                 \
+    if (cur operation lim) {                       \
+        ip = codeArr[ip+1];                        \
+    }                                              \
+    else ip += 2;                                  \
     })
 
-DEF_CMD(JBE, 52, 3, {
-    elem_t lim = 0;
-    stack_pop(&proc->stack, &lim);
-    elem_t cur = 0;
-    stack_pop(&proc->stack, &cur);
-    if (cur <= lim) {
-        ip = codeArr[ip+1];
-    }
-    else ip += 2;
-    })
+DEF_CONDITIONAL_JMP(JB, 51, <)
+DEF_CONDITIONAL_JMP(JBE, 52, <=)
+DEF_CONDITIONAL_JMP(JA, 53, >)
+DEF_CONDITIONAL_JMP(JAE, 54, <=)
+DEF_CONDITIONAL_JMP(JE, 55, ==)
+DEF_CONDITIONAL_JMP(JNE, 56, !=)
 
-DEF_CMD(JA, 53, 3, {
-    elem_t lim = 0;
-    stack_pop(&proc->stack, &lim);
-    elem_t cur = 0;
-    stack_pop(&proc->stack, &cur);
-    if (cur > lim) {
-        ip = codeArr[ip+1];
-    }
-    else ip += 2;
-    })
-
-DEF_CMD(JAE, 54, 3, {
-    elem_t lim = 0;
-    stack_pop(&proc->stack, &lim);
-    elem_t cur = 0;
-    stack_pop(&proc->stack, &cur);
-    if (cur >= lim) {
-        ip = codeArr[ip+1];
-    }
-    else ip += 2;
-    })
-
-DEF_CMD(JE, 55, 3, {
-    elem_t lim = 0;
-    stack_pop(&proc->stack, &lim);
-    elem_t cur = 0;
-    stack_pop(&proc->stack, &cur);
-    if (cur == lim) {
-        ip = codeArr[ip+1];
-    }
-    else ip += 2;
-    })
-
-DEF_CMD(JNE, 56, 3, {
-    elem_t lim = 0;
-    stack_pop(&proc->stack, &lim);
-    elem_t cur = 0;
-    stack_pop(&proc->stack, &cur);
-    if (cur != lim) {
-        ip = codeArr[ip+1];
-    }
-    else ip += 2;
-    })
 
 
 

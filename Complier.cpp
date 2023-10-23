@@ -68,8 +68,7 @@ int complier(FILE* input, FILE* output) {
         }
     }
 
-    for (int i = 0; i < 30; i++)
-        printf("%d\n", codeArr[i]);
+
     position = 0;
     fseek(input, 9, SEEK_SET); //пропускаем сигнатуру и версию и сканируем файл ещё раз
 
@@ -92,8 +91,6 @@ int complier(FILE* input, FILE* output) {
     }
 
     fwrite(&position, sizeof(int), 1, output);
-    for (int i = 0; i < 30; i++)
-        printf("%d\n", codeArr[i]);
     fwrite(codeArr, sizeof(int), position, output);
 
     free(codeArr);

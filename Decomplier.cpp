@@ -36,7 +36,7 @@ int decomplier(FILE* input, FILE* output) {
 
     //printf("%d\n", ncommands);
     int* codeArr = (int*)calloc(ncommands, sizeof(int));
-    int f = fread(codeArr, sizeof(int), ncommands, input);
+    fread(codeArr, sizeof(int), ncommands, input);
 
     int current = 0;
 
@@ -61,7 +61,7 @@ int decomplier(FILE* input, FILE* output) {
 #undef DEF_CMD
 
 
-int print_reg(int number, FILE* output) {
+int print_reg(elem_t number, FILE* output) {
     if (number == RAX) fprintf(output,"rax \n");
     else if (number == RBX) fprintf(output, "rbx \n");
     else if (number == RCX) fprintf(output, "rcx \n");

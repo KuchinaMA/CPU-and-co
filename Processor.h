@@ -9,6 +9,7 @@ enum ProcessorErrors {
     WrongCommand  = 1 << 9
 };
 
+
 const int ProcessorVersion = 2;
 //static const char *Signature = "mipt";
 const int NumRegs = 3;
